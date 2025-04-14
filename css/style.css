@@ -1,0 +1,161 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url(image/Home_Page.png) no-repeat center center fixed;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: #2E1B5B;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.difficulty-container {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+select {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    color: #2E1B5B;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.difficulty-container::after {
+    content: "▼";
+    font-size: 18px;
+    font-style: italic;
+    color: #2E1B5B;
+    pointer-events: none;
+    position: absolute;
+}
+
+#start-btn {
+    position: absolute;
+    top: 64.7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    padding: 10px 20px;
+    background: transparent;
+    color: #2E1B5B;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #FF999A;
+    font-size: 25px;
+}
+
+#text-display {
+    font-size: 24px;
+    padding: 20px;
+    border-radius: 25px;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    background: #eee;
+    min-height: 50px;
+}
+
+.balloon-gray {
+    color: rgb(114, 108, 108);
+}
+
+.balloon-black {
+    color: black;
+}
+
+.balloon-red {
+    color: red;
+}
+
+#hidden-input {
+    position: absolute;
+    opacity: 0;
+    left: 50%;
+    top: 60%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    height: 50px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+button {
+    background: transparent;
+    color: #2E1B5B;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#game-screen,
+#result-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh;
+    text-align: center;
+}
+
+#result-screen h2,
+#result-screen p {
+    text-align: center;
+    margin: 10px 0;
+}
