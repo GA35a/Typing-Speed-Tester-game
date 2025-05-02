@@ -49,11 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSentence = getTextBasedOnDifficulty();
         sentenceDisplay.innerHTML = `<span class="balloon-gray">${currentSentence}</span>`;
         hiddenInput.value = "";
+        hiddenInput.disabled = false;
         timerElement.textContent = "0";
         time = 0;
         isGameStarted = true;
         isTimerRunning = false;
 
+        clearInterval(interval);
         setTimeout(() => hiddenInput.focus(), 50);
     }
 
@@ -64,64 +66,76 @@ document.addEventListener("DOMContentLoaded", () => {
             timerElement.textContent = time;
         }, 1000);
     }
-
-    function stopGame() {
+    function stopGame(hasTypedWrong = false) {
         clearInterval(interval);
-
+        isGameStarted = false;
+        hiddenInput.disabled = true;
+    
         const typed = hiddenInput.value;
         const totalChars = currentSentence.length;
         let correctChars = 0;
-
+    
         for (let i = 0; i < totalChars; i++) {
             if (typed[i] === currentSentence[i]) {
                 correctChars++;
             }
         }
-
+    
         const accuracy = Math.floor((correctChars / totalChars) * 100);
-
         finalTimeElement.textContent = time;
         accuracyElement.textContent = accuracy + "%";
-
+    
+        const resultMsg = document.getElementById("result-message");
+        if (hasTypedWrong) {
+            resultMsg.textContent = "You have entered some wrong characters.";
+        } else {
+            resultMsg.textContent = "Well done! All characters are correct.";
+        }
+    
         gameScreen.style.display = "none";
         resultScreen.style.display = "flex";
     }
+    
 
     hiddenInput.addEventListener("input", () => {
         if (!isGameStarted) return;
-
+    
         if (!isTimerRunning && hiddenInput.value.length > 0) {
             isTimerRunning = true;
             startTimer();
         }
-
+    
         const typed = hiddenInput.value;
         let output = "";
-
+        let hasTypedWrong = false;
+    
         for (let i = 0; i < currentSentence.length; i++) {
             if (i < typed.length) {
                 if (typed[i] === currentSentence[i]) {
                     output += `<span class="balloon-black">${currentSentence[i]}</span>`;
                 } else {
                     output += `<span class="balloon-red">${currentSentence[i]}</span>`;
+                    hasTypedWrong = true;
                 }
             } else {
                 output += `<span class="balloon-gray">${currentSentence[i]}</span>`;
             }
         }
-
+    
         sentenceDisplay.innerHTML = output;
-
+    
         if (typed.length === currentSentence.length) {
-            stopGame();
+            stopGame(hasTypedWrong);
         }
     });
+    
 
     function restartGame() {
         clearInterval(interval);
         time = 0;
         isGameStarted = true;
         isTimerRunning = false;
+        hiddenInput.disabled = false;
 
         currentSentence = getTextBasedOnDifficulty();
         sentenceDisplay.innerHTML = `<span class="balloon-gray">${currentSentence}</span>`;
